@@ -38,7 +38,7 @@ class Contribution extends Component{
             display: true,
         })
         this.props.updateContribution(this.state.contribution, this.props.contribution._id);   
-        document.getElementById("new-contribution").reset();
+        this.refs.form.reset();
     }
     addSource = async (e) => {
         e.preventDefault()
@@ -49,8 +49,8 @@ class Contribution extends Component{
         const newSource = document.createElement("input");
         newSource.id = `source[${this.state.numberOfSources - 1}]`;
         newSource.type = "url";
-        const form = document.getElementById("new-contribution");
-        const button = document.getElementById("additional-sources");
+        const form = this.refs.form("new-contribution");
+        const button = this.refs.button("additional-sources");
         form.insertBefore(newSource, button)
     }
     openEdit = (e) => {
@@ -80,10 +80,10 @@ class Contribution extends Component{
             )  
         } else {
             return (
-                <form id="new-contribution" onSubmit={this.handleSubmit}>
-                    explination/comment: <br/><textarea id="comment" name="comment" type="text" onChange={this.updateContribution}/><br/>
+                <form id="new-contribution" onSubmit={this.handleSubmit} ref="form">
+                    explination/comment: <br/><textarea id="comment" name="comment" type="text" onChange={this.updateContribution} defaultValue={this.props.contribution.comment} /><br/>
                     sources: <br/><input id="source[0]" type="url"/>
-                    <button id="additional-sources"onClick={this.addSource}>add another source</button><br/>
+                    <button id="additional-sources"onClick={this.addSource} ref="button">add another source</button><br/>
                     <input type="submit"/>
                 </form>  
             )

@@ -14,6 +14,7 @@ class AddContribution extends Component {
         }
     }
     handleSubmit = async (e) => {
+        console.log(e.currentTarget)
         e.preventDefault();
         const comment = document.getElementById("comment")
         await this.setState({
@@ -36,7 +37,7 @@ class AddContribution extends Component {
                 numberOfSources: 0,
         })
         this.props.addContribution(this.state.contribution);   
-        document.getElementById("new-contribution").reset();
+        this.refs.form.reset();
     }
     addSource = async (e) => {
         e.preventDefault()
@@ -47,18 +48,18 @@ class AddContribution extends Component {
         const newSource = document.createElement("input");
         newSource.id = `source[${this.state.numberOfSources - 1}]`;
         newSource.type = "url";
-        const form = document.getElementById("new-contribution");
-        const button = document.getElementById("additional-sources");
+        const form = this.refs.form
+        const button = this.refs.button
         form.insertBefore(newSource, button)
     }
     render(){
         return(
-            <div>
-                <h3>Add a Contribution</h3>
-                <form id="new-contribution" onSubmit={this.handleSubmit}>
-                    explination/comment: <br/><textarea id="comment" name="comment" type="text" onChange={this.updateContribution}/><br/>
+            <div >
+                <h2>Add a Contribution</h2>
+                <form id="new-contribution" onSubmit={this.handleSubmit} ref="form">
+                    explanation/comment: <br/><textarea id="comment" name="comment" type="text" onChange={this.updateContribution}/><br/>
                     sources: <br/><input id="source[0]" type="url"/>
-                    <button id="additional-sources"onClick={this.addSource}>add another source</button><br/>
+                    <button id="additional-sources"onClick={this.addSource} ref="button">add another source</button><br/>
                     <input type="submit"/>
                 </form> 
             </div>

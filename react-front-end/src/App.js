@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import AddContribution from './addContribution';
 import Contribution from './contribution';
 
@@ -11,7 +10,7 @@ class App extends Component {
 			isLoaded: false,
 			newestComicNumber: Number,
 			comicNumber: null,
-			contributions: ["hey"],
+			contributions: [],
 		}
 	}
 	getContributions = async () => {
@@ -26,7 +25,7 @@ class App extends Component {
 				body: JSON.stringify(contribution),
 				headers: {
 				'Content-Type': 'application/json'
-				}
+				},
 			});
 		} catch(err){
 			return(err)
@@ -39,14 +38,13 @@ class App extends Component {
 	}
 	updateContribution = async (contribution, id) => {
 		try {
-			const updatedContribution = await fetch(`http://localhost:9000/contributions/${id}`, {
+			await fetch(`http://localhost:9000/contributions/${id}`, {
 				method: 'PUT',
 				body: JSON.stringify(contribution),
 				headers: {
 				'Content-Type': 'application/json'
-				}
+				},
 			});
-			const parsedResponse = await updatedContribution.json();
 		} catch(err){
 			return(err)
 		}
@@ -125,11 +123,12 @@ class App extends Component {
 			...this.state,
 			isLoaded: false,
 			comicNumber: nextComic,
-			contributions: [Object],
+			contributions: [],
 		})
 		this.componentDidMount();
 	}
 	render (){
+		console.log(this.state);
 		if (!this.state.isLoaded){
 			return(
 				<div>Loading...</div>
@@ -137,22 +136,34 @@ class App extends Component {
 		}else {
 			return (
 				<div className="App">
-					<img src={this.state.comic.img} alt='i guess this has to be here'/>
-					<button id="previous"onClick={this.chooseComic}>previous</button>
-					<button id="random"onClick={this.chooseComic}>random</button>
-					<button id="next"onClick={this.chooseComic}>next</button>
-					<form action="3" id="select"onSubmit={this.chooseComic}>
-						<input type="text" placeholder="find comic by number"/>
-						<input type="submit" value="find" />
-					</form>
-					{this.state.contributions.map((contribution, i) => {
-						return (
-							<div key={i}>
-								<Contribution contribution={contribution} deleteContribution={this.deleteContribution} updateContribution={this.updateContribution}/>
-							</div>	
-						)	
-					})}
-					<AddContribution addContribution={this.addContribution} comicNumber={this.state.comicNumber}/>
+					<div id="Grid">
+						<nav id="navbar" className="center">
+							<button id="previous"onClick={this.chooseComic}>previous</button>
+							<button id="random"onClick={this.chooseComic}>random</button>
+							<button id="next"onClick={this.chooseComic}>next</button>
+							<form action="3" id="select"onSubmit={this.chooseComic}>
+								<input type="text" placeholder="find comic by number"/>
+								<input type="submit" value="find" />
+							</form>
+						</nav>
+						<div id="comic-display">
+							<h1>Comic {this.state.comic.num}: {this.state.comic.title}</h1>
+							<img id="comic" className="center" src={this.state.comic.img} alt='i guess this has to be here'/>
+						</div>
+						<div id="new-contribution">
+							<AddContribution addContribution={this.addContribution} comicNumber={this.state.comicNumber}/>
+						</div>
+						<div id="explinations">
+							<h2>Explanations</h2>
+							{this.state.contributions.map((contribution, i) => {
+								return (
+									<div key={i}>
+										<Contribution contribution={contribution} deleteContribution={this.deleteContribution} updateContribution={this.updateContribution}/>
+									</div>	
+								)	
+							})}
+						</div>
+					</div>
 				</div>
 			);
 		}

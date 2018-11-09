@@ -11,17 +11,17 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }))
-
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
   optionsSuccessStatus: 200 
 }
 app.use(cors(corsOptions));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+
+
 app.use(morgan('short'));
 
 
