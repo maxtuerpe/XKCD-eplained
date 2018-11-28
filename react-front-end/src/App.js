@@ -146,9 +146,12 @@ class App extends Component {
 								<input type="submit" value="find" />
 							</form>
 						</nav>
-						<div id="comic-display">
+						<div className="center" id="comic-display">
 							<h1>Comic {this.state.comic.num}: {this.state.comic.title}</h1>
-							<img id="comic" className="center" src={this.state.comic.img} alt='i guess this has to be here'/>
+							<div className="comic-container">
+								<img id="comic" className="center" src={this.state.comic.img} alt='i guess this has to be here'/>
+							</div>
+							
 						</div>
 						<div id="new-contribution">
 							<AddContribution addContribution={this.addContribution} comicNumber={this.state.comicNumber}/>
