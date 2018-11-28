@@ -12,7 +12,7 @@ app.use(session({
   saveUninitialized: false
 }))
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://xkcd-explained.herokuapp.com/',
   credentials: true,
   optionsSuccessStatus: 200 
 }
