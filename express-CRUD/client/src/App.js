@@ -141,12 +141,16 @@ class App extends Component {
 						</form>
 					</nav>
 					<div className="center" id="comic-display">
-						<h1>Comic {this.state.comic.num}: {this.state.comic.title}</h1>
-							{this.state.isLoaded ? <div className="comic-container">
+						{this.state.isLoaded ?
+						<div>
+							<h1>Comic {this.state.comic.num}: {this.state.comic.title}</h1>
+							<div className="comic-container">
 								<img id="comic" className="center" src={this.state.comic.img} alt='i guess this has to be here'/>
-							</div> : 
-							<div>Loading...</div>
-							}
+							</div>
+						</div> 
+						: 
+						<div>Loading...</div>
+						}
 					</div>
 					<div id="new-contribution">
 						<AddContribution addContribution={this.addContribution} comicNumber={this.state.comicNumber}/>
