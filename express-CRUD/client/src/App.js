@@ -128,48 +128,43 @@ class App extends Component {
 		this.componentDidMount();
 	}
 	render (){
-		console.log(this.state);
-		if (!this.state.isLoaded){
-			return(
-				<div>Loading...</div>
-			)
-		}else {
-			return (
-				<div className="App">
-					<div id="Grid">
-						<nav id="navbar" className="center">
-							<button id="previous"onClick={this.chooseComic}>previous</button>
-							<button id="random"onClick={this.chooseComic}>random</button>
-							<button id="next"onClick={this.chooseComic}>next</button>
-							<form action="3" id="select"onSubmit={this.chooseComic}>
-								<input type="text" placeholder="find comic by number"/>
-								<input type="submit" value="find" />
-							</form>
-						</nav>
-						<div className="center" id="comic-display">
-							<h1>Comic {this.state.comic.num}: {this.state.comic.title}</h1>
-							<div className="comic-container">
+		return(
+			<div className="App">
+				<div id="Grid">
+					<nav id="navbar" className="center">
+						<button id="previous"onClick={this.chooseComic}>previous</button>
+						<button id="random"onClick={this.chooseComic}>random</button>
+						<button id="next"onClick={this.chooseComic}>next</button>
+						<form action="3" id="select"onSubmit={this.chooseComic}>
+							<input type="text" placeholder="find comic by number"/>
+							<input type="submit" value="find" />
+						</form>
+					</nav>
+					<div className="center" id="comic-display">
+						<h1>Comic {this.state.comic.num}: {this.state.comic.title}</h1>
+							{this.state.isLoaded ? <div className="comic-container">
 								<img id="comic" className="center" src={this.state.comic.img} alt='i guess this has to be here'/>
-							</div>
-							
-						</div>
-						<div id="new-contribution">
-							<AddContribution addContribution={this.addContribution} comicNumber={this.state.comicNumber}/>
-						</div>
-						<div id="explinations">
-							<h2>Explanations</h2>
-							{this.state.contributions.map((contribution, i) => {
-								return (
-									<div key={i}>
-										<Contribution contribution={contribution} deleteContribution={this.deleteContribution} updateContribution={this.updateContribution}/>
-									</div>	
-								)	
-							})}
-						</div>
+							</div> : 
+							<div>Loading...</div>
+							}
+					</div>
+					<div id="new-contribution">
+						<AddContribution addContribution={this.addContribution} comicNumber={this.state.comicNumber}/>
+					</div>
+					<div id="explinations">
+						<h2>Explanations</h2>
+						{this.state.contributions.map((contribution, i) => {
+							return (
+								<div key={i}>
+									<Contribution contribution={contribution} deleteContribution={this.deleteContribution} updateContribution={this.updateContribution}/>
+								</div>	
+							)	
+						})}
 					</div>
 				</div>
-			);
-		}
+			</div>
+		);
 	}
 }
+
 export default App;
