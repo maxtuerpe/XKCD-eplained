@@ -14,13 +14,13 @@ class App extends Component {
 		}
 	}
 	getContributions = async () => {
-		const contributions = await fetch(`/contributions?comic=${this.state.comicNumber}`);
+		const contributions = await fetch(`/api/v1/contributions?comic=${this.state.comicNumber}`);
 		const contributionsParsedJSON = await contributions.json();
 		return contributionsParsedJSON
 	}
 	addContribution = async (contribution) => {
 		try {
-			await fetch('/contributions', {
+			await fetch('/api/v1/contributions', {
 				method: 'POST',
 				body: JSON.stringify(contribution),
 				headers: {
@@ -33,12 +33,12 @@ class App extends Component {
 		this.componentDidMount();
 	}
 	deleteContribution = async (id) => {
-		fetch(`/contributions/${id}`, {method: "DELETE"});
+		fetch(`/api/v1/contributions/${id}`, {method: "DELETE"});
 		this.componentDidMount();
 	}
 	updateContribution = async (contribution, id) => {
 		try {
-			await fetch(`/contributions/${id}`, {
+			await fetch(`/api/v1/contributions/${id}`, {
 				method: 'PUT',
 				body: JSON.stringify(contribution),
 				headers: {

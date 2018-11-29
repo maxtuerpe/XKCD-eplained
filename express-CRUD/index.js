@@ -5,6 +5,7 @@ const bodyParser     = require('body-parser');
 const cors           = require('cors');
 const morgan         = require('morgan');
 const session        = require('express-session')
+require('dotenv').config();
 
 require('./db/db');
 app.use(express.static(path.join(__dirname, 'client/build')));
