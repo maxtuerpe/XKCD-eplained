@@ -13,7 +13,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "heroku-postbuild": "cd react-front-end && npm install && npm run build"
   },
   "author": "",
