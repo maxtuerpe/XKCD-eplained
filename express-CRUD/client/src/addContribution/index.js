@@ -55,7 +55,7 @@ class AddContribution extends Component {
     render(){
         return(
             <div >
-                <h2>Add a Contribution</h2>
+                <h2>Add an explanation</h2>
                 <form id="new-contribution" onSubmit={this.handleSubmit} ref="form">
                     explanation/comment: <br/><textarea id="comment" name="comment" type="text" onChange={this.updateContribution}/><br/>
                     sources: <br/><input id="source[0]" type="url"/>
