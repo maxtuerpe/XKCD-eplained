@@ -147,7 +147,7 @@ class App extends Component {
 							<div className="comic-container">
 								<img id="comic" className="center" src={this.state.comic.img} alt="Comic unavailable I guess.
 								
-								,--._,--.
+								  ,--._,--.
 								,'  ,'   ,-`.
 					 (`-.__    /  ,'   /
 					  `.   `--'        \__,--'-.

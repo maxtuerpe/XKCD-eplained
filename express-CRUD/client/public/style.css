@@ -21,9 +21,15 @@
     width: 70%;
 }
 #new-contribution{
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
     grid-area: C;
 }
 #explinations{
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
     grid-area: D;
 }
 .comic-container{
